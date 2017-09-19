@@ -1,3 +1,6 @@
 [submodule "Gosha"]
 	path = Gosha
 	url = https://github.com/alekseik1/LaTeX	
+[submodule "labs/third-party"]
+	path = labs/third-party
+	url = https://github.com/alekseik1/Phys_Lab
