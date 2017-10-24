@@ -4,3 +4,6 @@
 [submodule "labs/third-party"]
 	path = labs/third-party
 	url = https://github.com/alekseik1/Phys_Lab
+[submodule "informatics/TF_code"]
+	path = informatics/TF_code
+	url = https://github.com/alekseik1/cpp_lections_2017
