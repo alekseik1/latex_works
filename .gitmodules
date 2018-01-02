@@ -7,3 +7,6 @@
 [submodule "informatics/TF_code"]
 	path = informatics/TF_code
 	url = https://github.com/alekseik1/cpp_lections_2017
+[submodule "informatics/3sem/TF_code"]
+	path = informatics/3sem/TF_code
+	url = https://github.com/alekseik1/cpp_lections_2017
