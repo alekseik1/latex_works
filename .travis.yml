@@ -9,6 +9,7 @@ env:
     - LATEX_PACKAGES="texlive-fonts-recommended texlive-latex-extra texlive-fonts-extra dvipng texlive-latex-recommended texlive-base texlive-bibtex-extra texlive-extra-utils texlive-font-utils texlive-binaries texlive-generic-extra texlive-generic-recommended texlive-lang-cyrillic texlive-latex-base texlive-latex-extra texlive-latex-recommended texlive-luatex texlive-math-extra texlive-pictures texlive-pstricks texlive-science texlive-xetex"
     - DIRECTORY="game-theory"
     - FILE="main"
+    - OUTPUT_NAME="game-theory"
     
 before_install:
   - set -o pipefail
@@ -24,10 +25,10 @@ install:
 script:
   # Check that code compiles
   - export PREV_DIR=$(pwd) &&
-   mkdir releases;
+    mkdir releases;
     cd $DIRECTORY &&
-    travis_wait 1 pdflatex -output-directory $PREV_DIR/releases $FILE.tex &&
-    travis_wait 1 pdflatex -output-directory $PREV_DIR/releases $FILE.tex &&
+    travis_wait 1 pdflatex -jobname=$OUTPUT_NAME -output-directory $PREV_DIR/releases $FILE.tex &&
+    travis_wait 1 pdflatex -jobname=$OUTPUT_NAME -output-directory $PREV_DIR/releases $FILE.tex &&
     cd $PREV_DIR/releases &&
     find . &&
     echo "PREV_DIR is $PREV_DIR"
@@ -40,7 +41,7 @@ deploy:
   provider: releases
   skip-cleanup: true
   api_key: $GITHUB_TOKEN
-  file: "$PREV_DIR/releases/$FILE.pdf"
+  file: "$PREV_DIR/releases/$OUTPUT_FILE.pdf"
   overwrite: true
   on:
     tags: true
