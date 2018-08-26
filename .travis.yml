@@ -23,10 +23,10 @@ install:
 
 script:
   # Check that code compiles
-  - export PREV_DIR=$(pwd) && \ 
-    cd $DIRECTORY && \
-    travis_wait 1 pdflatex $FILE.tex && \
-    travis_wait 1 pdflatex $FILE.tex && \
+  - export PREV_DIR=$(pwd) &&
+    cd $DIRECTORY &&
+    travis_wait 1 pdflatex $FILE.tex &&
+    travis_wait 1 pdflatex $FILE.tex &&
     cd $(pwd)
     
 before_deploy:
