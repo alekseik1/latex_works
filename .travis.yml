@@ -1,0 +1,40 @@
+cache:
+  directories:
+    - $HOME/.cache/apt
+
+env:
+  - LATEX_PACKAGES="texlive-fonts-recommended texlive-latex-extra texlive-fonts-extra dvipng texlive-latex-recommended texlive-base texlive-bibtex-extra texlive-extra-utils texlive-font-utils texlive-binaries texlive-generic-extra texlive-generic-recommended texlive-lang-cyrillic texlive-latex-base texlive-latex-extra texlive-latex-recommended texlive-luatex texlive-math-extra texlive-pictures texlive-pstricks texlive-science texlive-xetex"
+  - DIRECTORY="game-theory"
+   - FILE="main.tex"
+    
+before_install:
+  - set -o pipefail
+  # Setup apt to cache
+  - mkdir -p $HOME/.cache/apt/partial
+  - sudo rm -rf /var/cache/apt/archives
+  - sudo ln -s $HOME/.cache/apt /var/cache/apt/archives
+
+install:
+  # Setup packages
+  - sudo apt-get -qq update && sudo apt-get install -y $LATEX_PACKAGES
+
+script:
+  # Check that code compiles
+  - export PREV_DIR=$(pwd) && \ 
+    cd $DIRECTORY && \
+    travis_wait 1 pdflatex $FILE.tex && \
+    travis_wait 1 pdflatex $FILE.tex && \
+    cd $(pwd)
+    
+before_deploy:
+  - git config --local user.name "alekseik1"
+  - git config --local user.email "1alekseik1@gmail.com"
+  
+deploy:
+  provider: releases
+  skip-cleanup: true
+  api_key: $GITHUB_TOKEN
+  file: "$DIRECTORY/$FILE.pdf"
+  overwrite: true
+  on:
+    tags: true
