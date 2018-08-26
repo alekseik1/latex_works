@@ -28,7 +28,9 @@ script:
     cd $DIRECTORY &&
     travis_wait 1 pdflatex -output-directory $PREV_DIR/releases $FILE.tex &&
     travis_wait 1 pdflatex -output-directory $PREV_DIR/releases $FILE.tex &&
-    cd $PREV_DIR/releases
+    cd $PREV_DIR/releases &&
+    find . &&
+    echo "PREV_DIR is $PREV_DIR"
     
 before_deploy:
   - git config --local user.name "alekseik1"
@@ -38,7 +40,7 @@ deploy:
   provider: releases
   skip-cleanup: true
   api_key: $GITHUB_TOKEN
-  file: "releases/$FILE.pdf"
+  file: "$PREV_DIR/releases/$FILE.pdf"
   overwrite: true
   on:
     tags: true
