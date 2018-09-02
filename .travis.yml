@@ -11,7 +11,7 @@ env:
     # Теория игр
     - DIRECTORY="game-theory" FILE="main" OUTPUT_NAME="game-theory"
     # Пррограмма теормеха
-    - DIRECTORY="theor-progr" FILE='main' OUTPUT_NAME='theormech-exam-programm-2018'
+    #- DIRECTORY="theor-progr" FILE='main' OUTPUT_NAME='theormech-exam-programm-2018'
     
 before_install:
   - set -o pipefail
