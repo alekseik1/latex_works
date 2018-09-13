@@ -1,0 +1,54 @@
+\subsection{Рассеивание фотона}
+\begin{problem}
+	% TODO: скатай с задавальника
+\end{problem}
+
+\textbf{Решение}:
+Будем полагать, что $c = 1$.
+\[
+\left\{
+\begin{aligned}[l]
+	&\text{фотон} &(\varepsilon, \vec{k})& \\
+	&\text{электрон} &\left(E, \vec{p}\right)
+\end{aligned}
+\rightarrow
+\left\{
+\begin{aligned}
+	&(\varepsilon', \vec{k'}) \\
+	&(E', \vec{p'})
+\end{aligned}
+\right.
+\right.
+\]
+Отсюда $\varepsilon = \abs{\vec{k}}$, 
+	$\varepsilon' = \abs{\vec{k'}}$,
+	$\abs{\vec{p}} = \sqrt{E^2 - m^2}$
+
+ЗСЭ:
+$$
+\begin{cases}
+	\varepsilon^2 - c^2 \vec{k}^2 = 0 \\
+	E^2 - c^2 \vec{p}^2 = m^2 c^4
+\end{cases}
+$$
+
+% todo: рисункок 1
+
+$$
+\begin{cases}
+	\vec{k} + \vec{p} = \vec{k'} + \vec{p'} \\
+	\varepsilon + E = \varepsilon' + E'
+\end{cases}
+$$
+
+\begin{dmath}
+	\vec{p'}^2 = \left(%
+\vec{p} + \vec{k} - \vec{k'} =%
+\varepsilon^2 + \varepsilon'^2 - 2 \varepsilon \varepsilon' \cos{\Theta} + \vec{p}^2 + 2 \vec{p} \vec{k} - 2\vec{p} \vec{k'} =%
+\varepsilon^2 + \varepsilon'^2 - \varepsilon \varepsilon' \cos{\Theta} + \abs{\vec{p}}^2 - 2 \varepsilon p - 2 p \varepsilon' \cos{\Theta}%
+\right)
+\end{dmath}
+Перепишем в виде
+$$
+\vec{p'}^2 = E'^2 - m^2 = \left(E + \varepsilon - \varepsilon'\right)^2 - m^2 = E^2 + \varepsilon^2 + \varepsilon'^2
+$$
