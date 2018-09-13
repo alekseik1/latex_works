@@ -9,9 +9,9 @@ env:
     - LATEX_PACKAGES="texlive-fonts-recommended texlive-latex-extra texlive-fonts-extra dvipng texlive-latex-recommended texlive-base texlive-bibtex-extra texlive-extra-utils texlive-font-utils texlive-binaries texlive-generic-extra texlive-generic-recommended texlive-lang-cyrillic texlive-latex-base texlive-latex-extra texlive-latex-recommended texlive-luatex texlive-math-extra texlive-pictures texlive-pstricks texlive-science texlive-xetex"
   matrix:
     # Теория игр
-    - DIRECTORY="game-theory" FILE="main" OUTPUT_NAME="game-theory"
+    #- DIRECTORY="game-theory" FILE="main" OUTPUT_NAME="game-theory"
     # Пррограмма теормеха
-    #- DIRECTORY="theor-progr" FILE='main' OUTPUT_NAME='theormech-exam-programm-2018'
+    - DIRECTORY="theor-progr" FILE='main' OUTPUT_NAME='theormech-exam-programm-2018'
     
 before_install:
   - set -o pipefail
