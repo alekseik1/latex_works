@@ -14,7 +14,7 @@ env:
     - DIRECTORY="theor-progr" FILE='main' OUTPUT_NAME='theormech-exam-programm-2018'
     # Stat term
     - DIRECTORY="stat_term/C_H_Cl3" FILE='main' OUTPUT_NAME='stat_term_C_H_Cl3'
-    - DIRECTORY="stat_term/sem_kr" FILE='main' OUTPUT_NAME='stat_term_sem_control_test'
+    - DIRECTORY="stat_term/sem_kr" FILE='ans' OUTPUT_NAME='stat_term_sem_control_test'
 
    
     
