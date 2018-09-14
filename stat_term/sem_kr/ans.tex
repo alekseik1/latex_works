@@ -1,0 +1,255 @@
+\documentclass[a4paper,12pt]{article}
+
+\input{preambula}
+
+
+\usepackage{graphicx,xcolor,adjustbox,setspace, amsmath, hyperref}
+\usepackage[normalem]{ulem} 
+
+\newcommand{\resh}{\noindent\textit{Решение:}\\}
+
+\newcounter{prim}
+\newenvironment{prim}{%
+	\addtocounter{prim}{1}
+	\noindent{\\
+		\textbf{\noindentПример \arabic{prim}\\}}%
+}{\vspace{2mm}\\
+\resh
+}
+\definecolor{orange}{rgb}{1, 0.7, 0.1}
+%\usepackage{ulem}
+
+\usepackage{bm} %жирный греческий шрифт
+
+\newenvironment{psm}
+{\left(\begin{smallmatrix*}[r]}
+	{\end{smallmatrix*}\right)}
+
+\newenvironment{pmatrixr}
+{\begin{pmatrix*}[r]}
+	{\end{pmatrix*}}
+
+\newcounter{prob}
+\newenvironment{prob}[1]{%
+	\addtocounter{prob}{1}
+	\noindent{\\
+		\textbf{\noindent\arabic{prob}-{#1}}}%
+}
+
+\renewcommand{\figurename}{\textbf{Рис.}}		%Чтобы вместо figure под рисунками писал "рис"
+\renewcommand{\tablename}{\textbf{Таблица}}		%Чтобы вместо table над таблицами писал Таблица
+
+
+\title{statterm-3sem}
+\author{Кожарин Алексей}
+\date{November 2017}
+\usepackage[left=1.27cm,right=1.27cm,top=1.27cm,bottom=2cm]{geometry}
+
+\begin{document}
+	
+	\begin{center}
+		\textbf{РЕШЕНИЯ ЗАДАЧ СЕМИНАРСКОЙ КОНТРОЛЬНОЙ ПО СТАТ. ТЕРМОДИНАМИКЕ}
+	\end{center}
+	%
+	%	\hfill\begin{minipage}{0.4\textwidth}
+	%		{\centering
+	%			При поддержке:\\
+	%			А. Кожарин, \href{https://vk.com/alekseik1}{VK}\\
+	%			Г. Демьянов, \href{https://vk.com/id37346992}{VK}\\
+	%			Г. Ильдар, \href{https://vk.com/gabdrakhmanovildar}{VK}\\
+	%			В. Линева, \href{https://vk.com/vika_lineva}{VK}\\
+	%		}
+	%	\end{minipage}%
+		
+		\begin{center}
+			{\textbf{Вариант 1}}
+		\end{center}
+		
+	\begin{prob}{1}
+		Получите выражение для частной производной $\left(\cfrac{\partial G}{\partial p}\right)_T$ как функции параметров состояния $p, V, T$ системы.
+		\begin{nonum}
+			$G=U + PV - TS; ~~ dG = -SdT + Vdp$ \\
+			Отсюда, учитывая $dT = 0$, получим
+			\begin{equation}
+				\left(\cfrac{\partial G}{\partial p}\right)_T = V
+			\end{equation}
+		\end{nonum}
+	\end{prob}
+	
+	\begin{prob}{1}
+		Температурная зависимость теплоёмкости CH$_4$ задаётся формулой: $C_V = 9.1 + 6\cdot10^{-2}\cdot T - 10^{-6}\cdot T^2 - 7.2\cdot 10^{-9}\cdot T^3$. Определите колебательную составляющую теплоёмкости при температурах 298 К и 1200 К, а также предельную долю C$_\text{кол}$.
+		\begin{nonum}
+			$C_V = C_{V}^\text{\,вращ} + C_V^\text{\,пост} + C_V^\text{\,кол}$ \\
+			Поскольку указанные температуры велики, вращательная теплоемкость постоянна и равна $C_V^\text{\,вращ} = \frac{3}{2}R = 12.465\, \frac{\text{Дж}}{\text{моль}\cdot\text{К}}$\,. Аналогично, для $C_V^\text{\,пост}= \frac{3}{2}R = 12.465\, \frac{\text{Дж}}{\text{моль}\cdot\text{К}}$\,. Тогда зависимость колебательной составляющей будет иметь вид: $C_V^\text{\,кол} = C_V - \frac{3}{2}R - \frac{3}{2}R$\,.
+			\begin{equation}
+				C_V^\text{\,кол} = -15.83 + 6\cdot10^{-2}\cdot T - 10^{-6}\cdot T^2 - 7.2\cdot 10^{-9}\cdot T^3
+			\end{equation}\label{eq:2}
+			Подставляя $T=298~K$ и $T = 1200~K$ в (2), получим:
+			$C_V^\text{\,колеб} (298~K) = \boxed{1.77 \frac{\text{Дж}}{\text{моль}\cdot\text{К}}}$, $C_V^\text{\,колеб} (1000~K) = \boxed{35.96 \frac{\text{Дж}}{\text{моль}\cdot\text{К}}}$\,.
+			
+			Доля колебательной теплоемкости:
+			$$
+			\kappa_{298} = \cfrac{C_V^\text{кол}}{C_V} = 0.066 = \boxed{6.6\%}
+			$$
+			$$
+			\kappa_{1000} = 0.59 = \boxed{59\%}
+			$$
+			
+			В пределе:
+			$$
+			C_V = 3/2 R + 3/2 R + (3*N-6)R = 3R + 9R = 12R
+			$$
+			$$
+			C_V^\text{кол} = (3N-6)R = 9R
+			$$
+			$$
+			\boxed{\kappa_\text{кол}^\text{пред} = \cfrac{9R}{12R} = \cfrac{3}{4}}
+			$$
+			Видно, что $\kappa_{1000} > \kappa_{298}$, так как $\theta_\text{колеб} \sim 10^3~\text{K}$ и при этой температуре возбуждаются колебательные уровни энергии.
+		\end{nonum}
+	\end{prob}
+	
+	\begin{prob}{1}
+		Какой из вращательных уровней молекулы О$_2$ наиболее заселён при температуре 1000 К? Момент инерции молекулы О$_2$ принять равным $19\cdot 10^{-47} \text{кг}\cdot \text{м}^2$.
+		\begin{nonum}
+			Характеристическая вращательная температура:
+			$$
+			\theta_\text{вр} = \cfrac{\hbar}{2J k} = \cfrac{1.054^2\cdot 10^{-68}}{2\cdot 19\cdot 10^{-47}\cdot 1.38\cdot 10^{-23}} = 2.1~\text{K}
+			$$
+			Запишем выражение для статсуммы:
+			$$
+			Z_\text{вращ} = \cfrac{1}{6}\, 	\sum_{j=0}^{\infty} (2j+1) \exp\left[-\frac{\theta_\text{вр}}{T} j(j+1)\right]
+			$$
+			Вероятность встретить частицу на уровне с энергией $\epsilon$:
+			$$
+			P(\epsilon_\text{вращ}) = \cfrac{\exp \left[-\frac{\theta_\text{вр}}{T} j(j+1)\right] (2j+1)}{Z_\text{вращ}}
+			$$
+			Найдем ее максимум:
+			$$
+			\cfrac{\partial}{\partial j}\, \left[(2j+1)\exp\left(-\frac{\theta_\text{вр}}{T} j (j+1)\right)\right] = 2e^x - (2j+1)^2 e^x \left(\cfrac{\theta_\text{вр}}{T}\right) = 0
+			$$
+			$$
+			2 - \cfrac{\theta_\text{вр}}{T} (2j+1)^2 = 0
+			$$
+			$$
+			2j+1 = \sqrt{\cfrac{2T}{\theta_\text{вр}}} = \sqrt{\cfrac{2\cdot 10^3}{2.1}}
+			$$
+			$$
+			j = 14.8
+			$$
+			
+			Среди кандидатов теперь $j=14$ и $j=15$. Подставляя каждый из них в уравнение вероятности, находим, что при $\boxed{j=15}$ вероятность будет максимальна.
+		\end{nonum}
+	\end{prob}
+	
+	\begin{prob}{1}
+		В одной половине изолированного и разделённого перегородкой сосуда находится 2 моля идеального газа. Другая половина сосуда пустая. Чему равно изменение энтропии системы и тепловой эффект расширения газа после удаления перегородки?
+		\begin{nonum}
+			Будем считать, что наш газ идеален, а оболочка адиабатическая. При этом, в отсутствии теплообмена $dQ = 0$, а идеальный газ при расширении в вакуум \underline{не} совершает работы, следовательно, изменение его внутренней энергии равно нулю. Тепловой эффект, равный изменению энтальпии, тоже равен нулю.
+		
+			Разберемся с энтропией. По формуле (см. Кириченко "Термодинамика"):
+			$$\Delta S = \nu R \ln\left(\cfrac{V_2}{V_1}\right) + \nu\, C_V \ln\left(\cfrac{T_2}{T_1}\right) $$
+			
+			Имеем: $\frac{V_2}{V_1} = 2$, то есть $\Delta S = \nu R \ln 2 = \boxed{11.52\, \frac{\text{Дж}}{\text{К}}}$
+		\end{nonum}
+	\end{prob}
+	\setcounter{prob}{0}
+	\vspace{0.5cm}
+	\begin{center}
+		\textbf{Вариант 2}
+	\end{center}
+	
+	\begin{prob}{2}
+		Получите выражение для частной производной $\left(\cfrac{\partial F}{\partial V}\right)_T$ как функции параметров состояния $p, V, T$ системы.
+		\begin{nonum}
+			$F = U - TS;~~ dF = -pdV - SdT \Rightarrow \boxed{\left(\cfrac{\partial F}{\partial V}\right)_T = -p}$
+		\end{nonum}
+	\end{prob}
+	
+	\begin{prob}{2}
+		Температурная зависимость теплоёмкости CCl$_4$ задаётся формулой: $C_V = 89.3 + 9.6 \cdot 10^{-3}\,T -1.5\cdot 10^{-4}/T^2$. Определите колебательную составляющую теплоёмкости при температурах 298 К и 1200 К, а также предельную долю $C_\text{кол}$.
+		\begin{nonum}
+			$C_V = C_{V}^\text{\,вращ} + C_V^\text{\,пост} + C_V^\text{\,кол}$ \\
+			Поскольку указанные температуры велики, вращательная теплоемкость постоянна и равна $C_V^\text{\,вращ} = \frac{3}{2}R = 12.465\, \frac{\text{Дж}}{\text{моль}\cdot\text{К}}$\,. Аналогично, для $C_V^\text{\,пост}= \frac{3}{2}R = 12.465\, \frac{\text{Дж}}{\text{моль}\cdot\text{К}}$\,. Тогда зависимость колебательной составляющей будет иметь вид: $C_V^\text{\,кол} = C_V - \frac{3}{2}R - \frac{3}{2}R$\,.
+			$$
+				C_V^{298} = 89.3 + 9.6\cdot 10^{-3}\cdot 298 - 1.5\cdot 10^{-4}/298^2 = 89.3 + 2.8608 - 1.7\cdot 10^{-9} = 92.1608 \frac{\text{Дж}}{\text{моль}\cdot\text{К}}
+			$$
+			$$
+			C_\text{кол}^{298} = C_V^{298} - C_\text{пост} - C_\text{вр} = 92.1608 - 24.93 = 67.2301 \frac{\text{Дж}}{\text{моль}\cdot\text{К}}
+			$$
+			$$
+			\boxed{\kappa_{298} = \cfrac{67.2308}{92.1608} = 0.7295}
+			$$
+			
+			$$
+			C_V^{1200} = 89.3 + 9.6\cdot 10^{-3}\cdot 1200 - 1.5\cdot 10^{-4}/1200^2 = 89.3 + 11.52 - 0.01\cdot 10^{-8} = 100.82 \frac{\text{Дж}}{\text{моль}\cdot\text{К}}
+			$$
+			$$
+			C_\text{кол}^{1200} = C_V^{1200} - C_\text{пост} - C_\text{вр} = 100.82 - 24.93 = 75.89 \frac{\text{Дж}}{\text{моль}\cdot\text{К}}
+			$$
+			$$
+			\boxed{\kappa_{1200} = \cfrac{75.89}{100.82} = 0.7527}
+			$$
+			
+			В пределе:
+			$$
+			C_V = 3/2 R + 3/2 R + (3*N-6)R = 3R + 9R = 12R
+			$$
+			$$
+			C_V^\text{кол} = (3N-6)R = 9R
+			$$
+			$$
+			\boxed{\kappa_\text{кол}^\text{пред} = \cfrac{9R}{12R} = \cfrac{3}{4}}
+			$$
+		\end{nonum}
+	\end{prob}
+	
+	\begin{prob}{2}
+		Какой из вращательных уровней молекулы CО наиболее заселён при температуре 2000 К? Момент инерции молекулы СО принять равным $14.5\cdot10^{-47} \text{кг} \cdot \text{м}^2$.
+		\begin{nonum}
+			Характеристическая вращательная температура:
+			$$
+			\theta_\text{вр} = \cfrac{\hbar^2}{2J k} = \cfrac{1.054^2\cdot 10^{-68}}{2\cdot 14.5\cdot 10^{-47}\cdot 1.38\cdot 10^{-23}} = 2.78~\text{K}
+			$$
+			Запишем выражение для статсуммы:
+			$$
+			Z_\text{вращ} = \cfrac{1}{6}\, 	\sum_{j=0}^{\infty} (2j+1) \exp\left[-\frac{\theta_\text{вр}}{T} j(j+1)\right]
+			$$
+			Вероятность встретить частицу на уровне с энергией $\epsilon$:
+			$$
+			P(\epsilon_\text{вращ}) = \cfrac{\exp \left[-\frac{\theta_\text{вр}}{T} j(j+1)\right] (2j+1)}{Z_\text{вращ}}
+			$$
+			Найдем ее максимум:
+			$$
+			\cfrac{\partial}{\partial j}\, \left[(2j+1)\exp\left(-\frac{\theta_\text{вр}}{T} j (j+1)\right)\right] = 2e^x - (2j+1)^2 e^x \left(\cfrac{\theta_\text{вр}}{T}\right) = 0
+			$$
+			$$
+			2 - \cfrac{\theta_\text{вр}}{T} (2j+1)^2 = 0
+			$$
+			$$
+			2j+1 = \sqrt{\cfrac{2T}{\theta_\text{вр}}} = \sqrt{\cfrac{2\cdot 10^3}{2.1}}
+			$$
+			$$
+			j = 18.5
+			$$
+			
+			Среди кандидатов теперь $j=18$ и $j=19$. Подставляя каждый из них в уравнение вероятности, находим, что при $\boxed{j=18}$ вероятность будет максимальна.
+		\end{nonum}
+	\end{prob}
+	
+	\begin{prob}{2}
+		Произведения главных моментов инерции для молекул бромбензола и пара-дихлорбензола практически одинаковы. Какова разность мольных вращательных энтропий этих газов?
+		\begin{nonum}
+			По формуле для энтропии:
+			$$
+			S_\text{вр} = \cfrac{1}{2} R \ln I_1 I_2 I_3 + \cfrac{3}{2} R \ln T - R \ln \sigma + 1320.8 ~~\left[\cfrac{\text{Дж}}{\text{моль}\cdot\text{К}}\right]
+			$$
+			
+			При прочих равных параметрах разность создаст только число симметрии, которое для бромбензола равно $\sigma_1 = 2$, а для п-дихлорбезнола $\sigma = 4$. Тогда $\Delta S_\text{вр} = -R \ln \sigma_2 + R\ln \sigma_1 = R\ln \cfrac{4}{2}$
+			$$
+			\boxed{\Delta S_\text{вр}  = 5.76 \cfrac{\text{Дж}}{\text{моль}\cdot\text{К}}}
+			$$
+		\end{nonum}
+	\end{prob}
+	
+\end{document}
