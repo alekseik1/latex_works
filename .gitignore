@@ -221,3 +221,5 @@ TSWLatexianTemp*
 
 # Dolpin files
 .directory
+
+.DS_Store
