@@ -1,0 +1,251 @@
+% Этот шаблон документа разработан в 2014 году
+% Данилом Фёдоровых (danil@fedorovykh.ru) 
+% для использования в курсе 
+% <<Документы и презентации в \LaTeX>>, записанном НИУ ВШЭ
+% для Coursera.org: http://coursera.org/course/latex .
+% Исходная версия шаблона --- 
+% https://www.writelatex.com/coursera/latex/5.1
+
+\documentclass[t]{beamer}  % [t], [c], или [b] --- вертикальное выравнивание на слайдах (верх, центр, низ)
+%\documentclass[handout]{beamer} % Раздаточный материал (на слайдах всё сразу)
+%\documentclass[aspectratio=169]{beamer} % Соотношение сторон
+
+% \usetheme{Berkeley} % Тема оформления
+% \usetheme{Bergen}
+\usetheme{Madrid}
+
+\usecolortheme{seagull} % Цветовая схема
+%\useinnertheme{circles}
+%\useinnertheme{rectangles}
+
+% \usetheme{HSE}
+
+%%% Работа с русским языком
+\usepackage{cmap}					% поиск в PDF
+\usepackage{mathtext} 				% русские буквы в формулах
+\usepackage[T2A]{fontenc}			% кодировка
+\usepackage[utf8]{inputenc}			% кодировка исходного текста
+\usepackage[english,russian]{babel}	% локализация и переносы
+
+%% Beamer по-русски
+\newtheorem{rtheorem}{Теорема}
+\newtheorem{rproof}{Доказательство}
+\newtheorem{rexample}{Пример}
+
+%%% Дополнительная работа с математикой
+\usepackage{amsmath,amsfonts,amssymb,amsthm,mathtools} % AMS
+\usepackage{icomma} % "Умная" запятая: $0,2$ --- число, $0, 2$ --- перечисление
+
+%% Номера формул
+%\mathtoolsset{showonlyrefs=true} % Показывать номера только у тех формул, на которые есть \eqref{} в тексте.
+%\usepackage{leqno} % Нумерация формул слева
+
+%% Свои команды
+\DeclareMathOperator{\sgn}{\mathop{sgn}}
+
+%% Перенос знаков в формулах (по Львовскому)
+\newcommand*{\hm}[1]{#1\nobreak\discretionary{}
+{\hbox{$\mathsurround=0pt #1$}}{}}
+
+%%% Работа с картинками
+\usepackage{graphicx}  % Для вставки рисунков
+\graphicspath{{images/}{images2/}}  % папки с картинками
+\setlength\fboxsep{3pt} % Отступ рамки \fbox{} от рисунка
+\setlength\fboxrule{1pt} % Толщина линий рамки \fbox{}
+\usepackage{wrapfig} % Обтекание рисунков текстом
+
+%%% Работа с таблицами
+\usepackage{array,tabularx,tabulary,booktabs} % Дополнительная работа с таблицами
+\usepackage{longtable}  % Длинные таблицы
+\usepackage{multirow} % Слияние строк в таблице
+
+%%% Программирование
+\usepackage{etoolbox} % логические операторы
+
+%%% Другие пакеты
+\usepackage{lastpage} % Узнать, сколько всего страниц в документе.
+\usepackage{soul} % Модификаторы начертания
+\usepackage{csquotes} % Еще инструменты для ссылок
+%\usepackage[style=authoryear,maxcitenames=2,backend=biber,sorting=nty]{biblatex}
+\usepackage{multicol} % Несколько колонок
+
+%%% Картинки
+\usepackage{tikz} % Работа с графикой
+\usepackage{pgfplots}
+\usepackage{pgfplotstable}
+
+\title{Теория функционала плотности}
+% \subtitle{Документы и презентации в \LaTeX}
+% \author{Данил Фёдоровых}
+\date{}
+% \institute[Высшая школа экономики]{Национальный исследовательский университет \\ <<Высшая школа экономики>>}
+
+\begin{document}
+
+\frame[plain]{\titlepage}	% Титульный слайд
+
+\section{Общие положения}
+% \subsection{Команда pause}
+ 
+\begin{frame}
+	\frametitle{\insertsection} 
+	% \framesubtitle{\insertsubsection}
+	\begin{itemize}
+        \item Любое свойство системы взаимодействующих частиц может быть представлено как функционал от плотности в основном состоянии $n_{0} (\vec{r})$;
+        \item Делаются предположения о виде обменно-корреляционного функционала;
+	\end{itemize}
+\end{frame}
+
+
+\section{Основные теоремы}
+\begin{frame}
+	\frametitle{Формулировка теорем}
+    \begin{rtheorem}[Хохенберга-Кона]
+        \label{th1}
+        Внешний потенциал $V_{ext} (\vec{r})$ определяется электронной плотностью основного состояния $n_{0} (\vec{r})$ с точностью до простой аддитивной константы.
+    \end{rtheorem}
+    \begin{rtheorem}
+        \label{th2}
+        Для заданного $V_{ext} (\vec{r})$ существует функционал $E[n] (\vec{r})$, принимающий минимальное значение на плотности $n_G (\vec{r})$, соответствующей основному состоянию. При этом $E[n_G]$ является энергией основного состояния.
+    \end{rtheorem}
+\end{frame}
+
+\begin{frame}[shrink=7]
+    \frametitle{Доказательство т.1}
+        Предположим, что два потенциала $V_1 (\vec{r})$ и $V_2 (\vec{r})$ определяются одной и той же плотностью $n (\vec{r})$.
+        Тогда имеется два Гамильтониана $H_1$ и $H_2$ с той же самой плотностью, но разными волновыми функциями $\Psi_1$ и $\Psi_2$ соответственно. Можем записать:
+        \begin{multline}
+            E_1^0 < \left\langle\Psi_{2}\left|H_{1}\right| \Psi_{2}\right\rangle=
+            \left\langle\Psi_{2}\left|H_{2}\right| \Psi_{2}\right\rangle+\left\langle\Psi_{2}\left|H_{1}-H_{2}\right| \Psi_{2}\right\rangle= \\
+            E_{2}^{0}+\int n(\vec{r})\left[V_{1}(\vec{r})-V_{2}(\vec{r})\right] d^3 r
+        \end{multline}
+        Аналогично:
+        \begin{multline}
+            E_2^0 < \left\langle\Psi_{1}\left|H_{2}\right| \Psi_{1}\right\rangle=
+            \left\langle\Psi_{1}\left|H_{1}\right| \Psi_{1}\right\rangle+\left\langle\Psi_{1}\left|H_{2}-H_{1}\right| \Psi_{1}\right\rangle= \\
+            E_{1}^{0}+\int n(\vec{r})\left[V_{2}(\vec{r})-V_{1}(\vec{r})\right] d^3 r
+        \end{multline}
+        Складывая два равенства, получаем $E_{1}^{0}+E_{2}^{0}<E_{2}^{0}+E_{1}^{0}$, что является противоречием. Предположение было неверным.
+\end{frame}
+
+\begin{frame}[shrink=7]
+    \frametitle{Доказательство т.2}
+    Рассматриваем ${n (\vec{r})}$, соответствующую гамильтониану в \textit{некотором} поле $V$ ($V$-представимая плотность). Тогда энергия является функционалом:
+    \begin{equation}
+        E[n]=T[n]+V_{ext}[n]+V_{e e}[n] \equiv \tilde{F}_{HK}[n]+ V_{ext}[n]
+    \end{equation}
+    \begin{equation}
+        V_{ext}[n]=\int n(\vec{r}) V_{ext}(\vec{r}) d^3 r, \quad 
+        \tilde{F}_{H K}[n]=T[n]+V_{e e}[n]
+    \end{equation}
+    Рассмотрим $n (\vec{r})$, соответствующую основному состоянию в поле $V$ (по т.1 такое поле найдется) и соответствующую в.ф. $\Psi$.
+    На ней:
+    \begin{equation}
+        E^{0}_1 = E[n] = \left\langle\Psi\left|H\right| \Psi\right\rangle
+    \end{equation}
+    Возьмем другую произвольную $n' (\vec{r})$, соответствующую полю $V'$ и в.ф. $\Psi'$. 
+    Имеем:
+    \begin{equation}
+        E^0_1=\left\langle\Psi\left|H\right| \Psi\right\rangle
+        <
+        \left\langle\Psi'\left|H\right| \Psi'\right\rangle=E_2^0
+    \end{equation}
+    Неравенство достигается потому, что $\Psi$ соответствует основному состоянию.
+    На $n$ функционал достигает минимума и его значение является энергией основного состояния в потенциале $V$.
+
+\end{frame}
+
+\begin{frame}[shrink=20]{Уравения Кона-Шэма}
+    % Основное предположение, не имеющее обоснования:
+    % \begin{equation}
+    %     T[n(\vec{r})]=-2 \frac{\hbar^{2}}{2 m} \sum_{i} \int \Psi_{i}^{*}(\vec{r}) \nabla^{2} \Psi_{i}(\vec{r}) d \vec{r}
+    % \end{equation}
+    Для системы $N$ невзаимодействующих электронов на $N$ орбиталях кинетическая энергия:
+    \begin{equation}
+        T_s [n(\vec{r})] = \sum_{i=1}^{N} \left\langle\varphi_{i}\left|-\frac{\hbar^2}{2m} \nabla^{2}\right| \varphi_{i}\right\rangle
+    \end{equation}
+    В случае взаимодействующих электронов выражение на $T[n]$ становится сложным. Но мы можем выделить из него $T_s[n]$, а остальное вынести в $V_{xc}$:
+    \begin{equation}
+        E[n] = T_s[n] + V_{ext}[n] + V_{ee}[n] + (T[n] - T_s[n])
+    \end{equation}
+    Выделяя $V_{ee}[n] = J [n] + \tilde{V}_{xc} [n] $, где $J$ - классический кулоновский потенциал:
+    \begin{equation}
+        J[n(\vec{r})]=\frac{1}{2} \int \frac{n\left(\vec{r}_{1}\right) n\left(\vec{r}_{2}\right)}{\left|\vec{r}_{1}-\vec{r}_{2}\right|} d \vec{r}_{1} d \vec{r}_{2}
+    \end{equation}
+    получим 
+    \begin{equation}
+        \label{eq:to_variate_E}
+        E[n]=T_s[n]+V_{ext}[n]+J[n]+\underbrace{(\tilde
+        {V}_{xc}[n] + T[n] - T_s[n])}_{V_{xc}}
+    \end{equation}
+    \textit{Предполагается}, что выделенный $V_{xc}$ является функционалом от $n$.
+    Тогда $V_{xc}[n]$ называется \textit{обменно-корреляционным функционалом}.
+
+\end{frame}
+\begin{frame}{Уравнения Кона-Шэма}
+    Необоходимо проварьировать функционал \ref{eq:to_variate_E} с учетом условия нормировки:
+    \begin{equation}
+        \int \delta n(\vec{r}) dr = 0, \quad n(\vec{r})=\sum_{i=1}^{N}\left|\varphi_{i}\right|^{2} 
+    \end{equation}
+    Последнее уравнение есть разложение плотности по волновым функциям в данном подходе.
+    Метод Лагранжа дает:
+    \begin{equation}
+        \left\{\begin{array}{l}
+{\left[-\frac{\hbar^{2}}{2 m} \nabla^{2}+V_{ext}(\vec{r})+
+    \int \frac{n\left(r^{\prime}\right)}{\left|r-r^{\prime}\right|} d r^{\prime} + v_{xc}[n](\vec{r})\right] 
+    \varphi_{i}(\vec{r})=
+\varepsilon_{i} \varphi_{i}(\vec{r})} \\
+\int \varphi_{i}^{*}(\vec{r}) \varphi_{i}(\vec{r}) d \vec{r}=1
+\end{array}\right.
+    \end{equation}
+    где $v_{xc}[n](\vec{r}) = \cfrac{\delta V_{x c}[n]}{\delta n(\vec{r})}$ -- т.н. обменно-корреляционный потенциал.
+
+    Определение $v_{xc}$ является основной проблемой метода.
+
+\end{frame}
+
+\section{Примеры обменно-корреляционных функционалов}
+
+\begin{frame}[shrink=25]{\insertsection}
+    \framesubtitle{Приближение локальной плотности (LDA)}
+    Хохенберг и Кон показали, что если $n(\vec{r})$ изменяется очень медленно, тогда
+    \begin{equation}
+        E_{xc}^{LDA}[n]=\int n(\vec{r}) \varepsilon_{xc}(n) d^3 r
+    \end{equation}
+    где $\varepsilon_{xc}(n)$ -- обменная и корреляционная энергия одного электрона в однородном электронном газе с плотностью $n(\vec{r})$. Ее можно представить в виде суммы обменного и корреляционного взаимодействия:
+    \begin{equation}
+        \varepsilon_{xc}(n) = \varepsilon_{x}(n) + \varepsilon_{c}(n) 
+    \end{equation}
+    Энергию обменного взаимодействия можно представить в виде:
+    \begin{equation}
+        \varepsilon_{x}(n)=-\frac{3 q^{2}}{4}\left(\frac{3}{\pi}\right)^{1 / 3} \int(n(\vec{r}))^{4 / 3} d^{3} r
+    \end{equation}
+    а энергию корреляционного взаимодействия полагают равной
+    \begin{equation}
+        \varepsilon_{c}(n)=\varepsilon_{c}^{V W N}(n)
+    \end{equation}
+    При этом $\varepsilon_{c}(n)$ параметризуется путём интерполяции высокоточных расчётов, выполненных квантовым методом Монте-Карло.
+\end{frame}
+
+\begin{frame}[shrink=25]{\insertsection}
+    \framesubtitle{Обобщённые градиентные функционалы (GGA)}
+    Имеют вид:
+    \begin{equation}
+        E_{x c}^{G G A}[n]=\int f[n(\vec{r}), \nabla n(\vec{r})] d^3 r
+    \end{equation}
+    Одни из наиболее популярных GGA функционалов это PBE (Perdew, Burke, Ernzerhof) и BLYP (обменных функционал Becke и корреляционный функционал Lee, Yang, Parr). 
+    \vspace{5mm}
+    
+    % Также существуют \textbf{гибридные функционалы}. Важнейшим функционалом ТФП является функционал B3LYP \cite{b3lyp}, объединяющий трёх-параметрический гибридный функционал Becke и корреляционный функционал Lee, Yang, Parr. B3 функционал добавляет Хартри-Фоковскую обменную энергию в функционал ТФП.
+
+\end{frame}
+
+\begin{frame}{Литература}
+    \begin{thebibliography}{10}
+        \bibitem{lectures} Лекции по квантовой химии весеннего семестра (2020)
+        \bibitem{martin-book} Richard M.Martin <<Electronic Structure. Basic Theory and Practical Methods>>, Cambridge University Press (2004)
+        \bibitem{b3lyp} P.J.Stephens, F.J.Devlin, C.F.Chabalowski, M.J.Frisch, J. Phys. Chem., \textbf{98}, 623 (1994) 
+    \end{thebibliography}
+\end{frame}
+
+\end{document}
