@@ -1,0 +1,142 @@
+\documentclass[a4paper,12pt]{article}
+
+\input{preambula}
+
+
+\usepackage{graphicx,xcolor,adjustbox,setspace, amsmath,pdfpages}
+
+\newcommand{\resh}{\noindent\textit{Решение:}\\}
+
+\newcounter{prim}
+\newenvironment{prim}{%
+	\addtocounter{prim}{1}
+	\noindent{\\
+		\textbf{\noindentПример \arabic{prim}\\}}%
+}{\vspace{2mm}\\
+\resh
+}
+\definecolor{orange}{rgb}{1, 0.7, 0.1}
+%\usepackage{ulem}
+
+\usepackage{bm} %жирный греческий шрифт
+
+\newenvironment{psm}
+{\left(\begin{smallmatrix*}[r]}
+	{\end{smallmatrix*}\right)}
+
+\newenvironment{pmatrixr}
+{\begin{pmatrix*}[r]}
+	{\end{pmatrix*}}
+
+\newenvironment{solution}{%
+    \textbf{Решение}%
+}
+
+\renewcommand{\figurename}{\textbf{Рис.}}		%Чтобы вместо figure под рисунками писал "рис"
+\renewcommand{\tablename}{\textbf{Таблица}}		%Чтобы вместо table над таблицами писал Таблица
+
+
+\title{ans2014}
+\author{Кожарин Алексей}
+\date{Nov 2021}
+\usepackage[left=1.27cm,right=1.27cm,top=1.27cm,bottom=2cm]{geometry}
+
+\begin{document}
+	
+\section{Задача №921}
+
+    \subsection{Условие}
+    Найти все положения равновесия и исследовать их на устойчивость.
+    Решить тремя способами:
+    \begin{itemize}
+        \item Через характеристический многочлен;
+        \item Через критерий Гурвица;
+        \item Через критерий Михайлова.
+    \end{itemize}
+
+    \begin{equation}
+        \begin{cases}
+            \dot x = \ln (1 + y + \sin x) \\
+        \dot y = 2 + (3 \sin x - 8)^{\frac{1}{3}}
+        \end{cases}
+    \end{equation}
+
+    \subsection{Решение}
+    Система уравнений
+    \begin{equation}
+        \begin{cases}
+            0 = \ln (1 + y + \sin x) \\
+            0 = 2 + (3 \sin x - 8)^{\frac{1}{3}}
+        \end{cases}
+    \end{equation}
+
+    из второго уравнения получим $3 \sin x - 8 = -8 \Leftrightarrow x = k \pi, k \in \mathbb{Z}$, а после подстановки во второе имеем $ y = 0$.
+    Итого система имеет следующие пары действительных корней: $(k \pi, 0)$, где $k \in \mathbb{Z}$.
+
+    Делаем замену: $x = k\pi + \epsilon_1,\, y=\epsilon_2$ и проводим разложение до линейных членов (с учетом $\sin (k\pi + x) = (-1)^k \sin x$), что дает:
+    \begin{equation}
+        \begin{cases}
+            \dot \epsilon_1 = \epsilon_2 + (-1)^k\, \epsilon_1 \\
+            \dot \epsilon_2 = \frac{1}{4}\,(-1)^k\,\epsilon_1
+        \end{cases}
+    \end{equation}
+
+    Этому соответствует характеристический многочлен:
+
+    \begin{equation}
+        \lambda^2 + (-1)^{k+1}\lambda + \frac{1}{4}\, (-1)^{k+1}
+        \label{eq:char_polyn}
+    \end{equation}
+    \subsubsection{Характеристический многочлен}
+    Корнями характеристического многочлена являются $\lambda_{1,2} = \cfrac{1}{2} \left((-1)^k \pm \sqrt{1 + (-1)^k} \right)$.
+    При $k = 2n + 1, n \in \mathbb{N}$ имеем $\mathrm{Re}\, \lambda_{1, 2} < 0$.
+    Следовательно, точки равновесия $((2n + 1)\pi, 0)$ \textbf{устойчивы}.
+    Если же $k = 2n$, то $\mathrm{Re}\, \lambda_1 > 0$.
+    Следовательно, точки равновесия $(2n\pi, 0)$ \textbf{неустойчивы}.
+    \subsubsection{Критерий Гурвица}
+    Матрица Гурвица
+    \[
+    \Delta = \begin{bmatrix}
+        (-1)^{k+1} & 0 \\
+        1 & \cfrac{1}{4}\, (-1)^{k+1}
+    \end{bmatrix}
+    \]
+
+    Первый минор положителен тогда и только тогда, когда $k = 2n + 1, n \in \mathbb{Z}$.
+    При этих $k$ будет положителен второй минор и свободный член.
+    При $k = 2n$ оба минора отрицательны и отрицателен свободный член.
+
+    Следовательно, по критерию Гурвица точки равновесия $((2n+1)\pi, 0)$ \textbf{устойчивы}, а точки $(2n\pi, 0)$ -- \textbf{неустойчивы}.
+
+    \subsubsection{Критерий Михайлова}
+    Уравнение характеристической кривой:
+    \begin{equation}
+        D(i\omega) = -\omega^2 + (-1)^{k+1}\, i \omega + \frac{1}{4}\, (-1)^{k+1}
+        \label{eq:mihalich}
+    \end{equation}
+
+    Для $\omega \rightarrow 0$ при $k = 2n+1$ имеем $\arg D (i \omega) \rightarrow 0$, при $k = 2n$ имеем $\arg D(i\omega) \rightarrow \pi$.
+
+    Для $\omega \rightarrow +\infty$ получим $\arg D(i\omega) \rightarrow \pi$.
+
+    По критерию Михайлова, для устойчивости системы необходимо и достаточно, чтобы вектор кривой Михайлова $D (i\omega)$ при изменении частоты $\omega$ от $0$ до $+\infty$ повернулся, нигде не обращаясь в нуль, вокруг начала координат против часовой стрелки на угол $n \pi / 2$, где $n$ обозначает порядок характеристического уравнения.
+
+    В случае $k = 2n+1$ вектор повернется на $\pi = \frac{2}{2}\,\pi$ против часовой стрелки, нигде не обращаясь в нуль (т.к. присутствует свободный член). Следовательно, по критерию Михайлова точки ${((2n+1)\pi,~0)}$ \textbf{устойчивы}.
+
+    В случае $k = 2n$ вектор повернется на $0 \neq \frac{2}{2}\,\pi$, нигде не обращаясь в нуль. Следовательно, по критерию Михайлова точки $(2n\pi,~0)$ \textbf{не устойчивы}.
+
+    В целях иллюстрации приведем качественный вид кривой Михайлова.
+
+    \begin{figure}[h]
+        \caption{Кривая Михайлова}
+        \centering
+        \includegraphics[width=\textwidth]{mih.pdf}
+    \end{figure}
+
+    На рисунке стреками вдоль графика обозначен ход кривой при увеличении $\omega$ от $0$ до $+\infty$.
+    Векторы, проведенные из начала координат, иллюстрируют изменение угла при увеличении $\omega$ от $0$ в сторону $+\infty$.
+    Синяя линия <<начинается>> с аргумента $\phi = \pi$ и при $\omega \rightarrow +\infty$ стремится к $\phi = \pi$, при этом $\forall \omega$ выполнено $\phi \in [\pi, \frac{3}{2}\,\pi)$. Это дает изменение аргумента, равное $0$.
+
+    Оранжевая линия <<начинается>> с аргумента $\phi = 0$ и при $\omega \rightarrow +\infty$ стремится к $\phi = \pi$, что дает изменение аргумента, равное $\pi$.
+
+\end{document}
