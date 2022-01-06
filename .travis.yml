@@ -15,6 +15,9 @@ env:
     # Stat term
     - DIRECTORY="stat_term/C_H_Cl3" FILE='main' OUTPUT_NAME='stat_term_C_H_Cl3'
     - DIRECTORY="stat_term/sem_kr" FILE='ans' OUTPUT_NAME='stat_term_sem_control_test'
+    # Стабильные оптимизации
+    - DIRECTORY="stability_optimization/hw1" FILE='main' OUTPUT_NAME='stability_opitimization_hw1'
+    - DIRECTORY="stability_optimization/hw2" FILE='main' OUTPUT_NAME='stability_opitimization_hw2'
 
    
     
